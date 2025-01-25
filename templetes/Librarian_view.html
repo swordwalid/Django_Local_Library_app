@@ -1,0 +1,16 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+    <h1>Borrowed Books</h1>
+    <ul>
+        {% for ins in bookinstance_list %}
+        <li>
+            <a href="{% url 'book-detail' ins.book.pk %}">{{ ins.book.title }}</a>  - Borrowed by: {{ins.borrower.username}}
+            (<span class="{% if ins.is_overdue %}text-danger{% endif %}">{{ins.due_back}}</span>) - <a href="{% url 'renew-book-librarian' ins.id %}">Renew</a>
+        </li>
+
+        {% endfor %}
+
+    </ul>
+{% endblock %}
