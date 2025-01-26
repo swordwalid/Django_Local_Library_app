@@ -28,7 +28,7 @@ def home(request):
         }
 
 
-    return render(request,'index.html',context=context)
+    return render(request,'D:/Django/env/templetes/index.html',context=context)
 
 class BookListView(generic.ListView):
     model=Book
