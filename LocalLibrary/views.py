@@ -28,7 +28,7 @@ def home(request):
         }
 
 
-    return render(request,'D:/Django/env/templetes/index.html',context=context)
+    return render(request,'index.html',context=context)
 
 class BookListView(generic.ListView):
     model=Book
@@ -36,7 +36,7 @@ class BookListView(generic.ListView):
     paginate_by=4
 
     # queryset=Book.objects.filter(title__icontains='war')[:5] instead we will use get_queryset() method
-    template_name='D:/Django/env/templetes/book_list.html'
+    template_name='book_list.html'
 
     def get_queryset(self):
         return Book.objects.filter()[:5] # you may add filter (title__icontains='war')
@@ -49,7 +49,7 @@ class BookListView(generic.ListView):
     
 class BookDetailView(generic.DetailView):
     model = Book
-    template_name= r'D:\Django\env\templetes\book_detail.html'
+    template_name= 'book_detail.html'
 
 class AuthorList(generic.ListView):
 
@@ -60,7 +60,7 @@ class AuthorList(generic.ListView):
 
 class AuthorDetail(generic.DetailView):
     model=Author
-    template_name= r"D:\Django\env\templetes\authordetails.html"
+    template_name= "authordetails.html"
 
 
 class LoanedBooksByUserListView(LoginRequiredMixin,generic.ListView):
@@ -80,7 +80,7 @@ class LoanedBooksByUserListView(LoginRequiredMixin,generic.ListView):
 class MarkReturnedView(PermissionRequiredMixin,generic.ListView):
     model=BookInstance
     permission_required='LocalLibrary.can_mark_returned'
-    template_name= r'D:\Django\env\templetes\Librarian_view.html'
+    template_name= 'Librarian_view.html'
 
     def get_queryset(self):
         return (
@@ -136,21 +136,21 @@ class AuthorCreate(PermissionRequiredMixin, CreateView):
     fields=['first_name','last_name','date_of_birth','date_of_death']
     initial={'date_of_death':'morse mal!!'}
     permission_required='LocalLibrary.can_add_author'
-    template_name= r'D:\Django\env\templetes\author_form.html'
+    template_name= 'author_form.html'
 
 class AuthorUpdate(PermissionRequiredMixin,UpdateView):
     model=Author
 
     fields='__all__'
     permission_required='LocalLibrary.can_change_author'
-    template_name= r'D:\Django\env\templetes\author_form.html'
+    template_name= 'author_form.html'
 
 class AuthorDelete(PermissionRequiredMixin,DeleteView):
 
     model=Author
     success_url=reverse_lazy('author_list')
     permission_required='LocalLibrary.can_delete_author'
-    template_name= r'D:\Django\env\templetes\author_confirm_delete.html'
+    template_name= 'author_confirm_delete.html'
 
     def form_valid(self,form):
         try:
@@ -165,13 +165,13 @@ class BookCreateView(PermissionRequiredMixin,CreateView):
     model=Book
     fields='__all__'
     permission_required='LocalLibrary.can_add_book'
-    template_name= r'D:\Django\env\templetes\book_form.html'
+    template_name= 'book_form.html'
 
 class BookUpdateView(PermissionRequiredMixin,UpdateView):
     model=Book
     fields='__all__'
     permission_required='LocalLibrary.can_edit_book'
-    template_name= r'D:\Django\env\templetes\book_form.html'
+    template_name= 'book_form.html'
 
 from django.db.models import Count
 
@@ -179,7 +179,7 @@ class BookDeleteView(PermissionRequiredMixin,DeleteView):
     model=Book
     success_url=reverse_lazy('books')
     permission_required='LocalLibrary.can_delete_book'
-    template_name= r'D:\Django\env\templetes\book_confirm_delete.html'
+    template_name= 'book_confirm_delete.html'
 
     def form_valid(self,form):
         

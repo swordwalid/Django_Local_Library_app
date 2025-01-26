@@ -63,7 +63,7 @@ ROOT_URLCONF = 'django_target.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [r'D:\Django\env\templetes'],
+        'DIRS': [os.path.join(BASE_DIR, 'templetes')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
